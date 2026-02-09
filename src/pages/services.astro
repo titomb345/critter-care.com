@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import ServiceCard from '../components/ServiceCard.astro';
-import services from '../content/services.json';
+import { services } from '../content/services.json';
 
 const visitsAndWalks = services.filter(s =>
   ['Home Visit', 'Dog Walk', 'Dog Walks & Home Visit'].includes(s.name)

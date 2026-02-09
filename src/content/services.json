@@ -1,5 +1,6 @@
-[
-  {
+{
+  "services": [
+    {
     "name": "Home Visit",
     "duration": "30 min",
     "price": "$30",
@@ -40,5 +41,6 @@
     "price": "$20 each way",
     "description": "Pet and key pickup/dropoff service.",
     "order": 6
-  }
-]
+    }
+  ]
+}

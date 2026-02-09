@@ -1,5 +1,6 @@
-[
-  {
+{
+  "testimonials": [
+    {
     "name": "Bill Bergquist",
     "quote": "I am very protective of my German Shepherd, Pico, and always worry when I trust her to someone else. But with Laurie, I know Pico is getting the attention and love she deserves. I'd trust her with my dog's life, and I'll gladly continue using Critter Care knowing Pico is in safe hands.",
     "images": ["/images/testimonials/bill-bergquist-1.jpg", "/images/testimonials/bill-bergquist-2.jpg"]
@@ -93,5 +94,6 @@
     "name": "Kim Streeter",
     "quote": "Best pet sitting service ever. I wouldn't leave my 3 dogs or cat with anyone else. It's not easy at my house with a cat that needs fluids on a daily basis and 2 very active dogs and one frenchie. I am at ease leaving my babies in her care. I love how she sends me pics when I am out of town so I know everyone is okay. I do recommend her to anyone and everyone. Best money I have ever spent. Thank you.",
     "images": ["/images/testimonials/kim-streeter-1.jpg", "/images/testimonials/kim-streeter-2.jpg"]
-  }
-]
+    }
+  ]
+}
