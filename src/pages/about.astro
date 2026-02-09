@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import Lightbox from '../components/Lightbox.astro';
 import about from '../content/about.json';
 ---
 
@@ -80,9 +81,11 @@ import about from '../content/about.json';
       <h2 class="font-heading text-2xl sm:text-3xl font-bold text-heading mb-5">Our Furry Family</h2>
       <p class="text-muted mb-6">Laurie currently shares her home with her own beloved rescue pets:</p>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        {about.pets.map(pet => (
+        {about.pets.map((pet, i) => (
           <div class="bg-white rounded-2xl shadow-sm border border-border/50 text-center overflow-hidden">
-            <img src={pet.photo} alt={pet.name} class="w-full h-40 object-cover" />
+            <button class="pet-thumb w-full cursor-pointer" data-index={i} data-src={pet.photo} data-alt={pet.name}>
+              <img src={pet.photo} alt={pet.name} class="w-full h-40 object-cover hover:scale-105 transition-transform duration-300" />
+            </button>
             <div class="p-5">
               <h3 class="font-heading font-bold text-heading mb-1">{pet.name}</h3>
               <p class="text-xs text-muted">{pet.description}</p>
@@ -90,6 +93,7 @@ import about from '../content/about.json';
           </div>
         ))}
       </div>
+      <Lightbox selector=".pet-thumb" />
     </section>
 
     <!-- Service Area -->
