@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import testimonials from '../content/testimonials.json';
+
+const featuredNames = [
+  "Bill Bergquist",
+  "Bridget Kugel",
+  "Svetlana P.",
+  "Kevin McCabe",
+];
+
+const featured = testimonials.filter(t => featuredNames.includes(t.name));
+const rest = testimonials.filter(t => !featuredNames.includes(t.name));
+---
+
+<BaseLayout title="Testimonials — Critter Care" description="Read what our happy clients have to say about Critter Care's pet sitting services.">
+  <Hero title="Testimonials" subtitle="A selection of stories from clients who've trusted us with their furry family members." />
+
+  <!-- Featured testimonials -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+    <h2 class="font-heading text-lg text-brown/70 mb-2">A Few Kind Words from Our Clients</h2>
+    <p class="text-sm text-brown-light/60 mb-8">A small sampling from families we've cared for over the years.</p>
+    <div class="columns-1 sm:columns-2 gap-8 space-y-8">
+      {featured.map(t => (
+        <div class="break-inside-avoid">
+          <TestimonialCard name={t.name} quote={t.quote} images={t.images} featured />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-6">
+    <hr class="border-warm-gray/20 mb-6" />
+    <p class="font-heading text-sm uppercase tracking-wider text-brown/40">More from our clients</p>
+  </div>
+
+  <!-- Remaining testimonials -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-10 space-y-12">
+      {rest.map(t => (
+        <div class="break-inside-avoid">
+          <TestimonialCard name={t.name} quote={t.quote} images={t.images} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Review modal for full testimonials -->
+  <div id="review-modal" class="review-modal-overlay" role="dialog" aria-modal="true" aria-label="Full review">
+    <div class="review-modal-panel">
+      <button class="review-modal-close" aria-label="Close">&times;</button>
+      <div class="text-gold text-3xl mb-3" aria-hidden="true">&ldquo;</div>
+      <blockquote id="review-modal-quote" class="text-brown-light leading-relaxed text-base mb-6"></blockquote>
+      <div class="pt-3 border-t border-warm-gray/30 mb-6">
+        <span id="review-modal-name" class="font-heading text-sm font-semibold text-brown"></span>
+      </div>
+      <div id="review-modal-photos" class="flex gap-2 flex-wrap"></div>
+    </div>
+  </div>
+
+  <!-- Lightbox for testimonial photos -->
+  <div id="testimonial-lightbox" class="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous photo">&#8249;</button>
+    <img src="" alt="Full size view of pet" />
+    <button class="lightbox-nav lightbox-next" aria-label="Next photo">&#8250;</button>
+  </div>
+
+  <script is:inline>
+    (function() {
+      // --- Image lightbox ---
+      var lightbox = document.getElementById('testimonial-lightbox');
+      var lightboxImg = lightbox.querySelector('img');
+      var photos = [];
+      var current = 0;
+
+      function openLightbox(images, index) {
+        photos = images;
+        current = index;
+        lightboxImg.src = photos[current];
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        // Only restore scroll if review modal isn't open behind it
+        if (!reviewModal.classList.contains('active')) {
+          document.body.style.overflow = '';
+        }
+      }
+
+      function nextPhoto() {
+        current = (current + 1) % photos.length;
+        lightboxImg.src = photos[current];
+      }
+
+      function prevPhoto() {
+        current = (current - 1 + photos.length) % photos.length;
+        lightboxImg.src = photos[current];
+      }
+
+      // Delegated click handler so dynamically-inserted modal photos also work
+      document.addEventListener('click', function(e) {
+        var btn = e.target.closest('.testimonial-img-btn');
+        if (btn) {
+          var images = JSON.parse(btn.dataset.images);
+          var index = parseInt(btn.dataset.index);
+          openLightbox(images, index);
+        }
+      });
+
+      lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+      lightbox.querySelector('.lightbox-prev').addEventListener('click', prevPhoto);
+      lightbox.querySelector('.lightbox-next').addEventListener('click', nextPhoto);
+      lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
+
+      // --- Review modal ---
+      var reviewModal = document.getElementById('review-modal');
+      var reviewQuote = document.getElementById('review-modal-quote');
+      var reviewName = document.getElementById('review-modal-name');
+      var reviewPhotos = document.getElementById('review-modal-photos');
+
+      function openReview(name, quote, images, hiresImages) {
+        reviewQuote.textContent = quote;
+        reviewName.innerHTML = '&mdash; ' + name;
+        reviewPhotos.innerHTML = '';
+
+        if (images && images.length > 0) {
+          images.forEach(function(img, i) {
+            var btn = document.createElement('button');
+            btn.className = 'testimonial-img-btn cursor-pointer rounded-lg overflow-hidden';
+            btn.dataset.images = JSON.stringify(hiresImages);
+            btn.dataset.index = i;
+            var imgEl = document.createElement('img');
+            imgEl.src = img;
+            imgEl.alt = 'Pet from ' + name;
+            imgEl.className = 'w-20 h-20 object-cover hover:opacity-80 transition-opacity';
+            imgEl.loading = 'lazy';
+            btn.appendChild(imgEl);
+            reviewPhotos.appendChild(btn);
+          });
+        }
+
+        reviewModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeReview() {
+        reviewModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      document.addEventListener('click', function(e) {
+        var btn = e.target.closest('.review-read-more');
+        if (btn) {
+          var images = JSON.parse(btn.dataset.images || '[]');
+          var hiresImages = JSON.parse(btn.dataset.hiresImages || '[]');
+          openReview(btn.dataset.name, btn.dataset.quote, images, hiresImages);
+        }
+      });
+
+      reviewModal.querySelector('.review-modal-close').addEventListener('click', closeReview);
+      reviewModal.addEventListener('click', function(e) { if (e.target === reviewModal) closeReview(); });
+
+      // --- Keyboard handling ---
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          // Close topmost overlay: lightbox first, then review modal
+          if (lightbox.classList.contains('active')) {
+            closeLightbox();
+          } else if (reviewModal.classList.contains('active')) {
+            closeReview();
+          }
+        }
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'ArrowRight') nextPhoto();
+        if (e.key === 'ArrowLeft') prevPhoto();
+      });
+    })();
+  </script>
+
+  <!-- CTA -->
+  <section class="bg-cream py-12">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-heading text-2xl font-bold text-brown mb-3">Join Our Happy Clients</h2>
+      <p class="text-brown-light mb-6">We'd love to care for your furry family members too.</p>
+      <a
+        href="/hire-us"
+        class="inline-flex items-center justify-center px-8 py-3 rounded-xl bg-sage text-white font-semibold hover:bg-sage-dark transition-colors"
+      >
+        Get Started
+      </a>
+    </div>
+  </section>
+</BaseLayout>

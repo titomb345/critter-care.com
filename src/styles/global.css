@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #F5F5F0;
+  --color-cream-dark: #E8E8E0;
+  --color-brown: #4A4A4A;
+  --color-brown-light: #6B6B6B;
+  --color-brown-dark: #333333;
+  --color-sage: #7a9e39;
+  --color-sage-light: #9BBD5A;
+  --color-sage-dark: #5F7E2B;
+  --color-gold: #7a9e39;
+  --color-gold-light: #9BBD5A;
+  --color-warm-white: #FAFAF8;
+  --color-warm-gray: #DDDDD5;
+
+  --font-heading: 'Nunito', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-warm-white);
+  color: var(--color-brown-dark);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Lightbox styles */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 2.5rem;
+  cursor: pointer;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.lightbox-prev { left: 1rem; }
+.lightbox-next { right: 1rem; }
+
+/* Review modal */
+.review-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.review-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.review-modal-panel {
+  background: white;
+  border-radius: 1rem;
+  max-width: 600px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 2rem;
+}
+
+.review-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  color: #6B6B6B;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.review-modal-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}

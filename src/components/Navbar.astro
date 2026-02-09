@@ -1,0 +1,93 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/services', label: 'Services' },
+  { href: '/about', label: 'About Us' },
+  { href: '/hire-us', label: 'Hire Us' },
+  { href: '/testimonials', label: 'Testimonials' },
+  { href: '/gallery', label: 'Photo Fun' },
+];
+---
+
+<header class="bg-warm-white/95 backdrop-blur-sm sticky top-0 z-50 border-b border-warm-gray">
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 group">
+        <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true">
+          <ellipse cx="32" cy="42" rx="14" ry="12" fill="#333" /><ellipse cx="15" cy="22" rx="7" ry="9" fill="#333" transform="rotate(-10 15 22)" /><ellipse cx="49" cy="22" rx="7" ry="9" fill="#333" transform="rotate(10 49 22)" /><ellipse cx="25" cy="10" rx="6" ry="8" fill="#333" transform="rotate(-5 25 10)" /><ellipse cx="39" cy="10" rx="6" ry="8" fill="#333" transform="rotate(5 39 10)" />
+        </svg>
+        <span class="font-heading text-xl sm:text-2xl font-bold text-brown">
+          Critter Care
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-1">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class:list={[
+              'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+              currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
+                ? 'bg-sage/10 text-sage-dark font-semibold'
+                : 'text-brown-light hover:text-brown hover:bg-cream-dark/50'
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden p-2 rounded-lg text-brown-light hover:text-brown hover:bg-cream-dark/50 transition-colors"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+      >
+        <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden pb-4">
+      <div class="flex flex-col gap-1">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class:list={[
+              'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+              currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
+                ? 'bg-sage/10 text-sage-dark font-semibold'
+                : 'text-brown-light hover:text-brown hover:bg-cream-dark/50'
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    menu.classList.toggle('hidden');
+    iconOpen.classList.toggle('hidden');
+    iconClose.classList.toggle('hidden');
+  });
+</script>

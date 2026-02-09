@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page Not Found — Critter Care" description="Oops! The page you're looking for doesn't exist.">
+  <section class="flex flex-col items-center justify-center min-h-[70vh] px-4 sm:px-6 lg:px-8 text-center">
+    <h1 class="font-heading text-8xl sm:text-9xl font-extrabold text-sage/20 mb-2 leading-none select-none">404</h1>
+    <h2 class="font-heading text-2xl sm:text-3xl font-bold text-brown mb-3">This page wandered off!</h2>
+    <p class="text-brown-light mb-8 max-w-md mx-auto">We can't find the page you're looking for. It may have been moved or no longer exists.</p>
+    <a
+      href="/"
+      class="inline-flex items-center justify-center px-8 py-3 rounded-xl bg-sage text-white font-semibold hover:bg-sage-dark transition-colors"
+    >
+      Back to Home
+    </a>
+  </section>
+</BaseLayout>

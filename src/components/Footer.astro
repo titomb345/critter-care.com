@@ -1,0 +1,67 @@
+---
+import settings from '../content/settings.json';
+import { Image } from 'astro:assets';
+import caricature from '../images/laurie-caricature.jpg';
+---
+
+<footer class="bg-brown-dark text-cream/80 mt-auto">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Brand -->
+      <div>
+        <span class="font-heading text-xl font-bold text-cream">{settings.businessName}</span>
+        <p class="text-sm text-cream/60 mt-1">
+          Serving South Bay families since {settings.founded}.
+        </p>
+        <div class="mt-4 flex items-center gap-2.5">
+          <Image
+            src={caricature}
+            alt="Original Critter Care illustration — Laurie with her furry friends"
+            width={88}
+            height={88}
+            class="w-11 h-11 rounded-lg object-cover border border-cream/15"
+          />
+          <span class="text-xs text-cream/40 leading-tight">Original Critter Care<br/>illustration</span>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="font-heading font-semibold text-cream mb-3">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/" class="hover:text-gold-light transition-colors">Services</a></li>
+          <li><a href="/about" class="hover:text-gold-light transition-colors">About Us</a></li>
+          <li><a href="/hire-us" class="hover:text-gold-light transition-colors">Hire Us</a></li>
+          <li><a href="/testimonials" class="hover:text-gold-light transition-colors">Testimonials</a></li>
+          <li><a href="/gallery" class="hover:text-gold-light transition-colors">Photo Fun</a></li>
+        </ul>
+      </div>
+
+      <!-- Connect -->
+      <div>
+        <h3 class="font-heading font-semibold text-cream mb-3">Connect With Us</h3>
+        <div class="space-y-2 text-sm">
+          <p>{settings.location}</p>
+          <p>Serving the {settings.serviceArea}</p>
+          {settings.facebook && (
+            <a
+              href={settings.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 hover:text-gold-light transition-colors mt-2"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+              Follow us on Facebook
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-cream/10 mt-8 pt-6 text-center text-xs text-cream/40">
+      <p>&copy; {new Date().getFullYear()} {settings.copyright}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

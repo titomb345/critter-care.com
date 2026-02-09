@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Home Visit",
+    "duration": "30 min",
+    "price": "$30",
+    "description": "Feeding, playful and affectionate time, taking in the mail & newspapers, lights on & off, & watering plants, administering medications if needed.",
+    "order": 1
+  },
+  {
+    "name": "Dog Walk",
+    "duration": "30 min",
+    "price": "$30",
+    "description": "Neighborhood walking, mail/newspaper collection, and water refreshing.",
+    "order": 2
+  },
+  {
+    "name": "Dog Walks & Home Visit",
+    "duration": "1 hr",
+    "price": "$45",
+    "description": "Combine a home visit and dog walk and get a deal!",
+    "order": 3
+  },
+  {
+    "name": "Dog Park Visits",
+    "duration": "1 hr",
+    "price": "$55",
+    "description": "Includes transportation within 5 miles and supervision at the park.",
+    "order": 4
+  },
+  {
+    "name": "Overnight Stays",
+    "duration": "7pm - 8am",
+    "price": "$75",
+    "description": "Encompasses home visit services plus dog walks as requested.",
+    "order": 5
+  },
+  {
+    "name": "Transportation Fee",
+    "duration": "",
+    "price": "$20 each way",
+    "description": "Pet and key pickup/dropoff service.",
+    "order": 6
+  }
+]

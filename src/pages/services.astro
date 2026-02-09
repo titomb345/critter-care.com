@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import services from '../content/services.json';
+
+const visitsAndWalks = services.filter(s =>
+  ['Home Visit', 'Dog Walk', 'Dog Walks & Home Visit'].includes(s.name)
+).sort((a, b) => a.order - b.order);
+
+const outingsAndOvernights = services.filter(s =>
+  ['Dog Park Visits', 'Overnight Stays'].includes(s.name)
+).sort((a, b) => a.order - b.order);
+
+const additionalServices = services.filter(s =>
+  ['Transportation Fee'].includes(s.name)
+).sort((a, b) => a.order - b.order);
+---
+
+<BaseLayout title="Services — Critter Care Pet Sitting & Dog Walking">
+  <Hero
+    title="Our Services"
+    subtitle="Everything we offer to keep your pets happy and cared for."
+  />
+
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <!-- Visits & Walks -->
+    <div class="mb-14">
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold text-brown mb-2">Visits & Walks</h2>
+      <p class="text-brown-light mb-6">Daily check-ins and exercise for your pets, right in your neighborhood.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {visitsAndWalks.map(service => (
+          <ServiceCard
+            name={service.name}
+            duration={service.duration}
+            price={service.price}
+            description={service.description}
+          />
+        ))}
+      </div>
+    </div>
+
+    <!-- Outings & Overnights -->
+    <div class="mb-14">
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold text-brown mb-2">Outings & Overnights</h2>
+      <p class="text-brown-light mb-6">Extended care for when your pet needs more time and attention.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {outingsAndOvernights.map(service => (
+          <ServiceCard
+            name={service.name}
+            duration={service.duration}
+            price={service.price}
+            description={service.description}
+          />
+        ))}
+      </div>
+    </div>
+
+    <!-- Additional Services -->
+    <div class="mb-14">
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold text-brown mb-2">Additional Services</h2>
+      <p class="text-brown-light mb-6">Extra options to make things easier for you and your pet.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {additionalServices.map(service => (
+          <ServiceCard
+            name={service.name}
+            duration={service.duration}
+            price={service.price}
+            description={service.description}
+          />
+        ))}
+      </div>
+    </div>
+
+    <!-- Pricing Notes / Policies -->
+    <div class="bg-cream rounded-2xl p-8 sm:p-10">
+      <h3 class="font-heading text-lg font-bold text-brown mb-3">Good to Know</h3>
+      <ul class="space-y-2 text-sm text-brown-light">
+        <li class="flex items-start gap-2">
+          <span class="text-gold mt-0.5">&#9679;</span>
+          <span>All prices shown are for single-pet visits.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-gold mt-0.5">&#9679;</span>
+          <span>Additional charges apply for holidays — please contact us for a quote.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-gold mt-0.5">&#9679;</span>
+          <span>Multiple pet pricing available upon request.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-gold mt-0.5">&#9679;</span>
+          <span>Cancellations and refunds can be credited towards future pet sitting services. No cash refunds.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-sage/5 py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold text-brown mb-4">Ready to Book?</h2>
+      <p class="text-brown-light mb-6">Get in touch today and give your pets the loving care they deserve.</p>
+      <a
+        href="/hire-us"
+        class="inline-flex items-center justify-center px-8 py-3 rounded-xl bg-sage text-white font-semibold hover:bg-sage-dark transition-colors"
+      >
+        Request Care
+      </a>
+    </div>
+  </section>
+</BaseLayout>

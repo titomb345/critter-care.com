@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import services from '../content/services.json';
+import testimonials from '../content/testimonials.json';
+
+const sortedServices = [...services].sort((a, b) => a.order - b.order);
+
+const featuredTestimonials = testimonials.filter(t =>
+  ['Bridget Kugel', 'Carlene P.', 'Svetlana P.'].includes(t.name)
+);
+---
+
+<BaseLayout title="Critter Care — Pet Sitting & Dog Walking in the South Bay">
+  <Hero
+    title="Trusted Pet Sitting & Dog Walking in the South Bay"
+    subtitle="Loving, professional care for your furry family — serving Lawndale and the South Bay since 1999."
+    showImage={true}
+  >
+    <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+      <a
+        href="/hire-us"
+        class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-sage text-white font-semibold hover:bg-sage-dark transition-colors"
+      >
+        Request Care
+      </a>
+      <a
+        href="/about"
+        class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-white/80 text-brown font-semibold hover:bg-white transition-colors border border-warm-gray"
+      >
+        Learn About Us
+      </a>
+    </div>
+  </Hero>
+
+  <!-- Services Section -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="text-center mb-12">
+      <h2 class="font-heading text-3xl sm:text-4xl font-bold text-brown mb-3">Our Services</h2>
+      <p class="text-brown-light max-w-xl mx-auto">Personalized care tailored to your pet's needs. All prices shown are for single-pet visits.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sortedServices.map(service => (
+        <ServiceCard
+          name={service.name}
+          duration={service.duration}
+          price={service.price}
+          description={service.description}
+        />
+      ))}
+    </div>
+
+    <div class="text-center mt-8">
+      <a
+        href="/services"
+        class="inline-flex items-center gap-1 text-sage-dark font-semibold hover:text-sage transition-colors"
+      >
+        View All Services
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Pricing Notes -->
+    <div class="mt-10 bg-cream rounded-2xl p-8 sm:p-10">
+      <h3 class="font-heading text-lg font-bold text-brown mb-3">Good to Know</h3>
+      <ul class="space-y-2 text-sm text-brown-light">
+        <li class="flex items-start gap-2">
+          <span class="text-gold mt-0.5">&#9679;</span>
+          <span>Additional charges apply for holidays — please contact us for a quote.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-gold mt-0.5">&#9679;</span>
+          <span>Multiple pet pricing available upon request.</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-gold mt-0.5">&#9679;</span>
+          <span>Cancellations and refunds can be credited towards future pet sitting services. No cash refunds.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Testimonials Preview -->
+  <section class="bg-cream-dark/30 py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-heading text-3xl sm:text-4xl font-bold text-brown mb-3">What Pet Parents Say</h2>
+        <p class="text-brown-light max-w-xl mx-auto">Don't just take our word for it — hear from the families we've served.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {featuredTestimonials.map(t => (
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-warm-gray/50">
+            <blockquote class="text-sm text-brown-light leading-relaxed mb-4">
+              &ldquo;{t.quote}&rdquo;
+            </blockquote>
+            <p class="font-heading font-bold text-brown text-sm">{t.name}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-8">
+        <a
+          href="/testimonials"
+          class="inline-flex items-center gap-1 text-sage-dark font-semibold hover:text-sage transition-colors"
+        >
+          Read More Testimonials
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-sage/5 py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold text-brown mb-4">Ready to Book?</h2>
+      <p class="text-brown-light mb-6">Get in touch today and give your pets the loving care they deserve.</p>
+      <a
+        href="/hire-us"
+        class="inline-flex items-center justify-center px-8 py-3 rounded-xl bg-sage text-white font-semibold hover:bg-sage-dark transition-colors"
+      >
+        Request Care
+      </a>
+    </div>
+  </section>
+</BaseLayout>

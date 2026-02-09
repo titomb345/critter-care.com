@@ -1,0 +1,23 @@
+---
+interface Props {
+  name: string;
+  duration: string;
+  price: string;
+  description: string;
+}
+
+const { name, duration, price, description } = Astro.props;
+---
+
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-warm-gray/50 hover:shadow-md hover:border-sage-light/50 transition-all duration-300 flex flex-col">
+  <div class="flex items-start justify-between mb-3">
+    <h3 class="font-heading text-lg font-bold text-brown">{name}</h3>
+    <span class="font-heading text-xl font-extrabold text-gold whitespace-nowrap ml-3">{price}</span>
+  </div>
+  {duration && (
+    <span class="inline-flex items-center self-start px-2.5 py-0.5 rounded-full text-xs font-medium bg-sage-light/20 text-sage-dark mb-3">
+      {duration}
+    </span>
+  )}
+  <p class="text-sm text-brown-light leading-relaxed flex-1">{description}</p>
+</div>
