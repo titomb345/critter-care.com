@@ -1,0 +1,43 @@
+---
+interface Props {
+  selector: string;
+}
+
+const { selector } = Astro.props;
+---
+
+<div class="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Photo viewer" data-lightbox-for={selector}>
+  <button class="lightbox-close" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" aria-label="Previous photo">&#8249;</button>
+  <img src="" alt="" />
+  <button class="lightbox-nav lightbox-next" aria-label="Next photo">&#8250;</button>
+</div>
+
+<script is:inline>
+  document.querySelectorAll('[data-lightbox-for]').forEach(lightbox => {
+    const selector = lightbox.dataset.lightboxFor;
+    const img = lightbox.querySelector('img');
+    const thumbs = document.querySelectorAll(selector);
+    const photos = Array.from(thumbs).map(t => ({ src: t.dataset.src, alt: t.dataset.alt || '' }));
+    let current = 0;
+
+    function show() { img.src = photos[current].src; img.alt = photos[current].alt; }
+    function open(i) { current = i; show(); lightbox.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function close() { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+    function next() { current = (current + 1) % photos.length; show(); }
+    function prev() { current = (current - 1 + photos.length) % photos.length; show(); }
+
+    thumbs.forEach(t => t.addEventListener('click', () => open(parseInt(t.dataset.index))));
+    lightbox.querySelector('.lightbox-close').addEventListener('click', close);
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', prev);
+    lightbox.querySelector('.lightbox-next').addEventListener('click', next);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+  });
+</script>
