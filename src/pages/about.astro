@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import about from '../content/about.json';
 ---
 
 <BaseLayout title="About Us — Critter Care" description="Learn about Laurie and Critter Care — over 25 years of professional pet sitting in the South Bay area.">
@@ -9,13 +10,13 @@ import Hero from '../components/Hero.astro';
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <!-- Story -->
     <section class="mb-14 overflow-hidden">
-      <h2 class="font-heading text-2xl sm:text-3xl font-bold text-brown mb-5">Our Story</h2>
-      <div class="space-y-5 text-brown-light leading-relaxed">
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold text-heading mb-5">Our Story</h2>
+      <div class="space-y-5 text-muted leading-relaxed">
         <div class="sm:float-right sm:ml-6 mb-4 sm:mb-2 flex justify-center">
           <img
-            src="/images/gallery/photo-41.jpg"
+            src={about.aboutPhoto || "/images/gallery/photo-41.jpg"}
             alt="Laurie with pets — founder of Critter Care"
-            class="w-56 rounded-xl shadow-md border border-warm-gray/30 object-cover"
+            class="w-56 rounded-xl shadow-md border border-border/30 object-cover"
           />
         </div>
         <p>
@@ -32,19 +33,20 @@ import Hero from '../components/Hero.astro';
 
     <!-- Experience -->
     <section class="mb-14">
-      <h2 class="font-heading text-2xl sm:text-3xl font-bold text-brown mb-5">Experience & Qualifications</h2>
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold text-heading mb-5">Experience & Qualifications</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {[
           'Over 25 years of professional pet care experience',
-          'Extensive work at doggy daycares in Manhattan Beach and El Segundo',
+          'Extensive work at doggy daycares in Manhattan Beach, El Segundo, and Torrance',
           'Volunteer at local animal shelters and rescue organizations',
           'Approved bottle foster feeder volunteer for City Shelters',
           'Experience at South Los Angeles and Harbor Animal Shelters',
           'Featured three times on "Good Day L.A.\'s Adopt a Pet" segment',
+          'Active support of many rescue organizations throughout the South Bay',
         ].map(item => (
-          <div class="flex items-center gap-3 bg-cream rounded-xl px-5 py-4">
-            <span class="text-sage text-lg flex-shrink-0">&#10003;</span>
-            <span class="text-brown-light">{item}</span>
+          <div class="flex items-center gap-3 bg-surface rounded-xl px-5 py-4">
+            <span class="text-primary text-lg flex-shrink-0">&#10003;</span>
+            <span class="text-muted">{item}</span>
           </div>
         ))}
       </div>
@@ -52,8 +54,8 @@ import Hero from '../components/Hero.astro';
 
     <!-- Services We Offer -->
     <section class="mb-14">
-      <h2 class="font-heading text-2xl sm:text-3xl font-bold text-brown mb-5">What We Offer</h2>
-      <p class="text-brown-light mb-5">With over two decades of hands-on experience, Laurie is comfortable caring for all kinds of pets and situations:</p>
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold text-heading mb-5">What We Offer</h2>
+      <p class="text-muted mb-5">With over two decades of hands-on experience, Laurie is comfortable caring for all kinds of pets and situations:</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {[
           'House visits & dog walks',
@@ -66,8 +68,8 @@ import Hero from '../components/Hero.astro';
           'Pets with sensory impairments or special needs',
         ].map(item => (
           <div class="flex items-center gap-2">
-            <span class="text-gold flex-shrink-0">&#9679;</span>
-            <span class="text-brown-light">{item}</span>
+            <span class="text-primary flex-shrink-0">&#9679;</span>
+            <span class="text-muted">{item}</span>
           </div>
         ))}
       </div>
@@ -75,41 +77,35 @@ import Hero from '../components/Hero.astro';
 
     <!-- Our Pets -->
     <section class="mb-14">
-      <h2 class="font-heading text-2xl sm:text-3xl font-bold text-brown mb-5">Our Furry Family</h2>
-      <p class="text-brown-light mb-6">Laurie currently shares her home with her own beloved rescue pets:</p>
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold text-heading mb-5">Our Furry Family</h2>
+      <p class="text-muted mb-6">Laurie currently shares her home with her own beloved rescue pets:</p>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="bg-white rounded-2xl p-6 shadow-sm border border-warm-gray/50 text-center">
-          <div class="text-3xl mb-2">🐱</div>
-          <h3 class="font-heading font-bold text-brown mb-1">Three Senior Cats</h3>
-          <p class="text-xs text-brown-light">Rescue cats adopted from Carson Shelter</p>
-        </div>
-        <div class="bg-white rounded-2xl p-6 shadow-sm border border-warm-gray/50 text-center">
-          <div class="text-3xl mb-2">🐕</div>
-          <h3 class="font-heading font-bold text-brown mb-1">Olive</h3>
-          <p class="text-xs text-brown-light">Maltese-Chihuahua, bottle-fed from 1 week old</p>
-        </div>
-        <div class="bg-white rounded-2xl p-6 shadow-sm border border-warm-gray/50 text-center">
-          <div class="text-3xl mb-2">🐶</div>
-          <h3 class="font-heading font-bold text-brown mb-1">Thunder & Magic</h3>
-          <p class="text-xs text-brown-light">Maltese siblings, born June 2022, rescued summer 2023</p>
-        </div>
+        {about.pets.map(pet => (
+          <div class="bg-white rounded-2xl shadow-sm border border-border/50 text-center overflow-hidden">
+            <img src={pet.photo} alt={pet.name} class="w-full h-40 object-cover" />
+            <div class="p-5">
+              <h3 class="font-heading font-bold text-heading mb-1">{pet.name}</h3>
+              <p class="text-xs text-muted">{pet.description}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
 
     <!-- Service Area -->
-    <section class="bg-sage/5 rounded-2xl p-6 sm:p-8">
-      <h2 class="font-heading text-2xl font-bold text-brown mb-3">Service Area</h2>
-      <p class="text-brown-light leading-relaxed">
-        We're based in <strong class="text-brown">Lawndale, CA</strong> and happily serve the <strong class="text-brown">South Bay and South Los Angeles</strong> area, including surrounding communities. We've been a trusted part of the neighborhood since 1999.
+    <section class="bg-primary-soft rounded-2xl p-6 sm:p-8">
+      <h2 class="font-heading text-2xl font-bold text-heading mb-3">Service Area</h2>
+      <p class="text-muted leading-relaxed">
+        We're based in <strong class="text-heading">Lawndale, CA</strong> and happily serve the <strong class="text-heading">South Bay and South Los Angeles</strong> area, including surrounding communities. We've been a trusted part of the neighborhood since 1999.
       </p>
     </section>
 
     <!-- CTA -->
     <div class="text-center mt-14">
-      <p class="text-brown-light mb-4">Want to learn more about how we can help?</p>
+      <p class="text-muted mb-4">Want to learn more about how we can help?</p>
       <div class="flex justify-center gap-4">
-        <a href="/" class="text-sm font-medium text-sage hover:text-sage/80 transition-colors underline underline-offset-4">View our services</a>
-        <a href="/hire-us" class="text-sm font-medium text-sage hover:text-sage/80 transition-colors underline underline-offset-4">Get in touch</a>
+        <a href="/" class="text-sm font-medium text-primary hover:text-primary/80 transition-colors underline underline-offset-4">View our services</a>
+        <a href="/hire-us" class="text-sm font-medium text-primary hover:text-primary/80 transition-colors underline underline-offset-4">Get in touch</a>
       </div>
     </div>
   </div>

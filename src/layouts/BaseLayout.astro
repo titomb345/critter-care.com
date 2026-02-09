@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import settings from '../content/settings.json';
 
 interface Props {
   title: string;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const { title, description = 'Professional pet sitting and boarding services in Lawndale, CA and the South Bay area. Trusted care since 1999.' } = Astro.props;
+const t = settings.theme;
 ---
 
 <!doctype html>
@@ -32,8 +34,23 @@ const { title, description = 'Professional pet sitting and boarding services in 
     <link rel="manifest" href="/site.webmanifest" />
     <title>{title}</title>
     <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    {t && (
+      <style set:html={`:root {
+        --color-primary: ${t.primary};
+        --color-primary-light: ${t.primaryLight};
+        --color-primary-dark: ${t.primaryDark};
+        --color-primary-soft: ${t.primarySoft};
+        --color-base: ${t.base};
+        --color-surface: ${t.surface};
+        --color-surface-alt: ${t.surfaceAlt};
+        --color-foreground: ${t.foreground};
+        --color-heading: ${t.heading};
+        --color-muted: ${t.muted};
+        --color-border: ${t.border};
+      }`} />
+    )}
   </head>
-  <body class="min-h-screen flex flex-col bg-warm-white text-brown-dark">
+  <body class="min-h-screen flex flex-col bg-base text-foreground">
     <Navbar />
     <main class="flex-1">
       <slot />

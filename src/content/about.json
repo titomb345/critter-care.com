@@ -1,0 +1,20 @@
+{
+  "aboutPhoto": "/images/gallery/photo-41.jpg",
+  "pets": [
+    {
+      "name": "Three Senior Cats",
+      "description": "Rescue cats adopted from Carson Shelter",
+      "photo": "/images/pets/dogs-in-yard.jpg"
+    },
+    {
+      "name": "Olive",
+      "description": "Maltese-Chihuahua, bottle-fed from 1 week old",
+      "photo": "/images/pets/olive.jpg"
+    },
+    {
+      "name": "Thunder & Magic",
+      "description": "Maltese siblings, born June 2022, rescued summer 2023",
+      "photo": "/images/pets/thunder-magic.jpg"
+    }
+  ]
+}
