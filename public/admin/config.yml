@@ -8,70 +8,85 @@ public_folder: "/images"
 collections:
   - name: "services"
     label: "Services"
-    file: "src/content/services.json"
-    format: "json"
     description: "Manage your pet care services and pricing"
-    fields:
+    files:
       - name: "services"
         label: "Services"
-        widget: "list"
+        file: "src/content/services.json"
+        format: "json"
         fields:
-          - { name: "name", label: "Service Name", widget: "string" }
-          - { name: "duration", label: "Duration", widget: "string", required: false, hint: "e.g. 30 min, 1 hr, 7pm - 8am" }
-          - { name: "price", label: "Price", widget: "string", hint: "e.g. $30, $45, $20 each way" }
-          - { name: "description", label: "Description", widget: "text" }
-          - { name: "order", label: "Display Order", widget: "number", value_type: "int", min: 1 }
+          - name: "services"
+            label: "Services"
+            widget: "list"
+            fields:
+              - { name: "name", label: "Service Name", widget: "string" }
+              - { name: "duration", label: "Duration", widget: "string", required: false, hint: "e.g. 30 min, 1 hr, 7pm - 8am" }
+              - { name: "price", label: "Price", widget: "string", hint: "e.g. $30, $45, $20 each way" }
+              - { name: "description", label: "Description", widget: "text" }
+              - { name: "order", label: "Display Order", widget: "number", value_type: "int", min: 1 }
 
   - name: "testimonials"
     label: "Testimonials"
-    file: "src/content/testimonials.json"
-    format: "json"
     description: "Manage customer testimonials"
-    fields:
+    files:
       - name: "testimonials"
         label: "Testimonials"
-        widget: "list"
+        file: "src/content/testimonials.json"
+        format: "json"
         fields:
-          - { name: "name", label: "Reviewer Name", widget: "string" }
-          - { name: "quote", label: "Quote", widget: "text" }
-          - name: "images"
-            label: "Pet Photos"
+          - name: "testimonials"
+            label: "Testimonials"
             widget: "list"
-            required: false
-            field: { name: "image", label: "Photo", widget: "image", media_folder: "/public/images/testimonials", public_folder: "/images/testimonials" }
+            fields:
+              - { name: "name", label: "Reviewer Name", widget: "string" }
+              - { name: "quote", label: "Quote", widget: "text" }
+              - name: "images"
+                label: "Pet Photos"
+                widget: "list"
+                required: false
+                field: { name: "image", label: "Photo", widget: "image", media_folder: "/public/images/testimonials", public_folder: "/images/testimonials" }
 
   - name: "settings"
     label: "Site Settings"
-    file: "src/content/settings.json"
-    format: "json"
     description: "Business information and site settings"
-    fields:
-      - { name: "businessName", label: "Business Name", widget: "string" }
-      - { name: "tagline", label: "Tagline", widget: "string" }
-      - { name: "owner", label: "Owner Name", widget: "string" }
-      - { name: "location", label: "Location", widget: "string" }
-      - { name: "serviceArea", label: "Service Area", widget: "string" }
-      - { name: "founded", label: "Year Founded", widget: "string" }
-      - { name: "facebook", label: "Facebook URL", widget: "string", required: false }
-      - { name: "email", label: "Email", widget: "string", required: false }
-      - { name: "phone", label: "Phone", widget: "string", required: false }
-      - { name: "copyright", label: "Copyright Name", widget: "string" }
+    files:
+      - name: "settings"
+        label: "Site Settings"
+        file: "src/content/settings.json"
+        format: "json"
+        fields:
+          - { name: "businessName", label: "Business Name", widget: "string" }
+          - { name: "tagline", label: "Tagline", widget: "string" }
+          - { name: "owner", label: "Owner Name", widget: "string" }
+          - { name: "location", label: "Location", widget: "string" }
+          - { name: "serviceArea", label: "Service Area", widget: "string" }
+          - { name: "founded", label: "Year Founded", widget: "string" }
+          - { name: "facebook", label: "Facebook URL", widget: "string", required: false }
+          - { name: "email", label: "Email", widget: "string", required: false }
+          - { name: "phone", label: "Phone", widget: "string", required: false }
+          - { name: "copyright", label: "Copyright Name", widget: "string" }
 
   - name: "about"
     label: "About Page"
-    file: "src/content/about.md"
-    format: "frontmatter"
     description: "Edit the About Us page content"
-    fields:
-      - { name: "body", label: "Content", widget: "markdown" }
+    files:
+      - name: "about"
+        label: "About Page"
+        file: "src/content/about.md"
+        format: "frontmatter"
+        fields:
+          - { name: "body", label: "Content", widget: "markdown" }
 
   - name: "hire"
     label: "Hire Us Page"
-    file: "src/content/hire-us.md"
-    format: "frontmatter"
     description: "Edit the Hire Us page content"
-    fields:
-      - { name: "body", label: "Content", widget: "markdown" }
+    files:
+      - name: "hire"
+        label: "Hire Us Page"
+        file: "src/content/hire-us.md"
+        format: "frontmatter"
+        fields:
+          - { name: "body", label: "Content", widget: "markdown" }
 
   - name: "documents"
     label: "Documents"
