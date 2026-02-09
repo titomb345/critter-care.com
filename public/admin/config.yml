@@ -96,8 +96,3 @@ collections:
         file: "src/content/docs-service-contract.md"
         fields:
           - { name: "file", label: "Service Contract PDF", widget: "file", media_folder: "/public/docs", public_folder: "/docs" }
-      - name: "pet-questionnaire"
-        label: "Pet Questionnaire (PDF)"
-        file: "src/content/docs-pet-questionnaire.md"
-        fields:
-          - { name: "file", label: "Pet Questionnaire PDF", widget: "file", media_folder: "/public/docs", public_folder: "/docs" }
