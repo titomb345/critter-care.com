@@ -65,6 +65,36 @@ collections:
           - { name: "email", label: "Email", widget: "string", required: false }
           - { name: "phone", label: "Phone", widget: "string", required: false }
           - { name: "copyright", label: "Copyright Name", widget: "string" }
+          - name: "theme"
+            label: "Theme Colors"
+            widget: "object"
+            fields:
+              - { name: "primary", label: "Primary Accent", widget: "color", default: "#1ea7a7", hint: "Buttons, links, checkmarks, bullet dots, and other key accents across the site" }
+              - { name: "primaryLight", label: "Primary Light", widget: "color", default: "#7dd4d4", hint: "Focus rings around form fields, subtle card hover borders, and footer link hovers" }
+              - { name: "primaryDark", label: "Primary Dark", widget: "color", default: "#158585", hint: "Button hover states, active navigation text, and link text that needs more contrast" }
+              - { name: "primarySoft", label: "Primary Soft", widget: "color", default: "#e6f7f7", hint: "Very subtle tinted backgrounds on 'Ready to Book' and 'Service Area' sections" }
+              - { name: "base", label: "Page Background", widget: "color", default: "#FAFAF8", hint: "Main background color for every page and the navigation bar" }
+              - { name: "surface", label: "Section Background", widget: "color", default: "#F5F5F0", hint: "Slightly tinted boxes like 'Good to Know', qualification badges, and the testimonials CTA" }
+              - { name: "surfaceAlt", label: "Alt Background", widget: "color", default: "#E8E8E0", hint: "Hover state on nav items and download buttons, hero gradient midpoint" }
+              - { name: "foreground", label: "Body Text", widget: "color", default: "#333333", hint: "Default paragraph text, form input text, and the footer background color" }
+              - { name: "heading", label: "Heading Text", widget: "color", default: "#4A4A4A", hint: "All section headings, card titles, the logo, and form labels" }
+              - { name: "muted", label: "Secondary Text", widget: "color", default: "#6B6B6B", hint: "Descriptions, subtitles, placeholder text, and other lower-emphasis content" }
+              - { name: "border", label: "Borders", widget: "color", default: "#DDDDD5", hint: "Card outlines, form field borders, divider lines, and the nav bottom border" }
+
+  - name: "gallery"
+    label: "Photo Gallery"
+    description: "Manage photos on the Photo Fun page"
+    files:
+      - name: "gallery"
+        label: "Photos"
+        file: "src/content/gallery.json"
+        format: "json"
+        fields:
+          - name: "photos"
+            label: "Photos"
+            widget: "list"
+            hint: "Upload, reorder, or remove photos. They appear on the Photo Fun page."
+            field: { name: "image", label: "Photo", widget: "image", media_folder: "/public/images/gallery", public_folder: "/images/gallery" }
 
   - name: "about"
     label: "About Page"
@@ -72,21 +102,19 @@ collections:
     files:
       - name: "about"
         label: "About Page"
-        file: "src/content/about.md"
-        format: "frontmatter"
+        file: "src/content/about.json"
+        format: "json"
         fields:
-          - { name: "body", label: "Content", widget: "markdown" }
+          - { name: "aboutPhoto", label: "Our Story Photo", widget: "image", media_folder: "/public/images", public_folder: "/images", hint: "Photo shown in the 'Our Story' section" }
+          - name: "pets"
+            label: "Our Furry Family"
+            widget: "list"
+            hint: "Pets shown in the 'Our Furry Family' section"
+            fields:
+              - { name: "name", label: "Pet Name", widget: "string" }
+              - { name: "description", label: "Description", widget: "string" }
+              - { name: "photo", label: "Photo", widget: "image", media_folder: "/public/images/pets", public_folder: "/images/pets" }
 
-  - name: "hire"
-    label: "Hire Us Page"
-    description: "Edit the Hire Us page content"
-    files:
-      - name: "hire"
-        label: "Hire Us Page"
-        file: "src/content/hire-us.md"
-        format: "frontmatter"
-        fields:
-          - { name: "body", label: "Content", widget: "markdown" }
 
   - name: "documents"
     label: "Documents"

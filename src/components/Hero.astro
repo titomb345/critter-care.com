@@ -11,7 +11,7 @@ interface Props {
 const { title, subtitle, showImage = false } = Astro.props;
 ---
 
-<section class="relative overflow-hidden bg-gradient-to-br from-cream via-cream-dark to-sage-light/20">
+<section class="relative overflow-hidden bg-gradient-to-br from-surface via-surface-alt to-primary-light/20">
   {showImage && (
     <div class="absolute inset-0">
       <Image
@@ -20,15 +20,15 @@ const { title, subtitle, showImage = false } = Astro.props;
         class="w-full h-full object-cover opacity-20"
         loading="eager"
       />
-      <div class="absolute inset-0 bg-gradient-to-b from-brown-dark/30 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-foreground/30 to-transparent"></div>
     </div>
   )}
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center">
-    <h1 class="font-heading text-4xl sm:text-5xl lg:text-7xl font-extrabold text-brown mb-4 leading-tight">
+    <h1 class="font-heading text-4xl sm:text-5xl lg:text-7xl font-extrabold text-heading mb-4 leading-tight">
       {title}
     </h1>
     {subtitle && (
-      <p class="text-lg sm:text-xl text-brown-light max-w-2xl mx-auto leading-relaxed">
+      <p class="text-lg sm:text-xl text-muted max-w-2xl mx-auto leading-relaxed">
         {subtitle}
       </p>
     )}

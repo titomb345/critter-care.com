@@ -1,27 +1,34 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cream: #F5F5F0;
-  --color-cream-dark: #E8E8E0;
-  --color-brown: #4A4A4A;
-  --color-brown-light: #6B6B6B;
-  --color-brown-dark: #333333;
-  --color-sage: #7a9e39;
-  --color-sage-light: #9BBD5A;
-  --color-sage-dark: #5F7E2B;
-  --color-gold: #7a9e39;
-  --color-gold-light: #9BBD5A;
-  --color-warm-white: #FAFAF8;
-  --color-warm-gray: #DDDDD5;
+  /* Accent */
+  --color-primary: #1ea7a7;
+  --color-primary-light: #7dd4d4;
+  --color-primary-dark: #158585;
+  --color-primary-soft: #e6f7f7;
 
+  /* Backgrounds */
+  --color-base: #FAFAF8;
+  --color-surface: #F5F5F0;
+  --color-surface-alt: #E8E8E0;
+
+  /* Text */
+  --color-foreground: #333333;
+  --color-heading: #4A4A4A;
+  --color-muted: #6B6B6B;
+
+  /* Borders */
+  --color-border: #DDDDD5;
+
+  /* Fonts */
   --font-heading: 'Nunito', sans-serif;
   --font-body: 'Inter', sans-serif;
 }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-warm-white);
-  color: var(--color-brown-dark);
+  background-color: var(--color-base);
+  color: var(--color-foreground);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -130,7 +137,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
-  color: #6B6B6B;
+  color: var(--color-muted);
   font-size: 1.5rem;
   cursor: pointer;
   background: none;

@@ -1,32 +1,18 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
+import gallery from '../content/gallery.json';
+import Lightbox from './Lightbox.astro';
 
-const galleryDir = path.join(process.cwd(), 'public/images/gallery');
-let photos: string[] = [];
-
-try {
-  const files = fs.readdirSync(galleryDir);
-  photos = files
-    .filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f))
-    .sort((a, b) => {
-      const numA = parseInt(a.match(/\d+/)?.[0] || '0');
-      const numB = parseInt(b.match(/\d+/)?.[0] || '0');
-      return numA - numB;
-    })
-    .map(f => `/images/gallery/${f}`);
-} catch {
-  // Gallery directory may not exist yet
-}
+const photos = gallery.photos.map(p => p.image);
 ---
 
 {photos.length > 0 ? (
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
     {photos.map((photo, i) => (
       <button
-        class="gallery-thumb aspect-square overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer border border-warm-gray/30 hover:border-sage-light/50 group"
+        class="gallery-thumb aspect-square overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer border border-border/30 hover:border-primary-light/50 group"
         data-index={i}
         data-src={photo}
+        data-alt={`Pet ${i + 1}`}
       >
         <img
           src={photo}
@@ -38,61 +24,7 @@ try {
     ))}
   </div>
 ) : (
-  <p class="text-center text-brown-light py-12">Photos coming soon!</p>
+  <p class="text-center text-muted py-12">Photos coming soon!</p>
 )}
 
-<!-- Lightbox -->
-<div id="lightbox" class="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Photo viewer">
-  <button class="lightbox-close" aria-label="Close">&times;</button>
-  <button class="lightbox-nav lightbox-prev" aria-label="Previous photo">&#8249;</button>
-  <img src="" alt="Full size view of pet" />
-  <button class="lightbox-nav lightbox-next" aria-label="Next photo">&#8250;</button>
-</div>
-
-<script is:inline>
-  (function() {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = lightbox.querySelector('img');
-    const thumbs = document.querySelectorAll('.gallery-thumb');
-    const photos = Array.from(thumbs).map(t => t.dataset.src);
-    let current = 0;
-
-    function open(index) {
-      current = index;
-      lightboxImg.src = photos[current];
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function close() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    function next() {
-      current = (current + 1) % photos.length;
-      lightboxImg.src = photos[current];
-    }
-
-    function prev() {
-      current = (current - 1 + photos.length) % photos.length;
-      lightboxImg.src = photos[current];
-    }
-
-    thumbs.forEach(thumb => {
-      thumb.addEventListener('click', () => open(parseInt(thumb.dataset.index)));
-    });
-
-    lightbox.querySelector('.lightbox-close').addEventListener('click', close);
-    lightbox.querySelector('.lightbox-prev').addEventListener('click', prev);
-    lightbox.querySelector('.lightbox-next').addEventListener('click', next);
-    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
-
-    document.addEventListener('keydown', (e) => {
-      if (!lightbox.classList.contains('active')) return;
-      if (e.key === 'Escape') close();
-      if (e.key === 'ArrowRight') next();
-      if (e.key === 'ArrowLeft') prev();
-    });
-  })();
-</script>
+<Lightbox selector=".gallery-thumb" />
