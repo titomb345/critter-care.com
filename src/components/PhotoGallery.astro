@@ -1,30 +1,14 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
+import gallery from '../content/gallery.json';
 
-const galleryDir = path.join(process.cwd(), 'public/images/gallery');
-let photos: string[] = [];
-
-try {
-  const files = fs.readdirSync(galleryDir);
-  photos = files
-    .filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f))
-    .sort((a, b) => {
-      const numA = parseInt(a.match(/\d+/)?.[0] || '0');
-      const numB = parseInt(b.match(/\d+/)?.[0] || '0');
-      return numA - numB;
-    })
-    .map(f => `/images/gallery/${f}`);
-} catch {
-  // Gallery directory may not exist yet
-}
+const photos = gallery.photos.map(p => p.image);
 ---
 
 {photos.length > 0 ? (
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
     {photos.map((photo, i) => (
       <button
-        class="gallery-thumb aspect-square overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer border border-warm-gray/30 hover:border-sage-light/50 group"
+        class="gallery-thumb aspect-square overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer border border-border/30 hover:border-primary-light/50 group"
         data-index={i}
         data-src={photo}
       >
@@ -38,7 +22,7 @@ try {
     ))}
   </div>
 ) : (
-  <p class="text-center text-brown-light py-12">Photos coming soon!</p>
+  <p class="text-center text-muted py-12">Photos coming soon!</p>
 )}
 
 <!-- Lightbox -->

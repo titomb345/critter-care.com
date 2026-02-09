@@ -8,5 +8,18 @@
   "facebook": "https://www.facebook.com/laurieb1",
   "email": "",
   "phone": "",
-  "copyright": "Critter Care"
+  "copyright": "Critter Care",
+  "theme": {
+    "primary": "#1ea7a7",
+    "primaryLight": "#7dd4d4",
+    "primaryDark": "#158585",
+    "primarySoft": "#e6f7f7",
+    "base": "#FAFAF8",
+    "surface": "#F5F5F0",
+    "surfaceAlt": "#E8E8E0",
+    "foreground": "#333333",
+    "heading": "#4A4A4A",
+    "muted": "#6B6B6B",
+    "border": "#DDDDD5"
+  }
 }
