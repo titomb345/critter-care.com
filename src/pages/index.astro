@@ -9,9 +9,7 @@ import { testimonials } from '../content/testimonials.json';
 
 const sortedServices = [...services].sort((a, b) => a.order - b.order);
 
-const featuredTestimonials = testimonials.filter(t =>
-  ['Bridget Kugel', 'Carlene P.', 'Svetlana P.'].includes(t.name)
-);
+const featuredTestimonials = testimonials.filter(t => t.featured).slice(0, 3);
 ---
 
 <BaseLayout title="Critter Care — Pet Sitting & Dog Walking in the South Bay">

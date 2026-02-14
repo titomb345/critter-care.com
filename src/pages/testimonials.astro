@@ -5,15 +5,8 @@ import TestimonialCard from '../components/TestimonialCard.astro';
 import Lightbox from '../components/Lightbox.astro';
 import { testimonials } from '../content/testimonials.json';
 
-const featuredNames = [
-  "Bill Bergquist",
-  "Bridget Kugel",
-  "Svetlana P.",
-  "Kevin McCabe",
-];
-
-const featured = testimonials.filter(t => featuredNames.includes(t.name));
-const rest = testimonials.filter(t => !featuredNames.includes(t.name));
+const featured = testimonials.filter(t => t.featured);
+const rest = testimonials.filter(t => !t.featured);
 ---
 
 <BaseLayout title="Testimonials — Critter Care | South Bay Pet Sitting Reviews" description="Read what our happy clients have to say about Critter Care's pet sitting services.">
