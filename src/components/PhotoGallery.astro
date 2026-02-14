@@ -28,6 +28,7 @@ const fullSizeUrls = await Promise.all(
     {photos.map((photo, i) => (
       <button
         class="gallery-thumb aspect-square overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer border border-border/30 hover:border-primary-light/50 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 group"
+        aria-label={`View pet photo ${i + 1}`}
         data-index={i}
         data-src={fullSizeUrls[i]}
         data-alt={`Critter Care pet photo ${i + 1}`}
