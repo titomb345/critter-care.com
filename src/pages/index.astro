@@ -4,7 +4,7 @@ import Hero from '../components/Hero.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import PricingNotes from '../components/PricingNotes.astro';
 import CTASection from '../components/CTASection.astro';
-import { services } from '../content/services.json';
+import { services, pricingNotes } from '../content/services.json';
 import { testimonials } from '../content/testimonials.json';
 
 const sortedServices = [...services].sort((a, b) => a.order - b.order);
@@ -63,11 +63,7 @@ const featuredTestimonials = testimonials.filter(t => t.featured).slice(0, 3);
 
     <!-- Pricing Notes -->
     <div class="mt-10">
-      <PricingNotes notes={[
-        'Additional charges apply for holidays — please contact us for a quote.',
-        'Multiple pet pricing available upon request.',
-        'Cancellations and refunds can be credited towards future pet sitting services. No cash refunds.',
-      ]} />
+      <PricingNotes notes={pricingNotes.slice(1)} />
     </div>
   </section>
 

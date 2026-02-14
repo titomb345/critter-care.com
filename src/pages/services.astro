@@ -4,7 +4,7 @@ import Hero from '../components/Hero.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import PricingNotes from '../components/PricingNotes.astro';
 import CTASection from '../components/CTASection.astro';
-import { services } from '../content/services.json';
+import { services, pricingNotes } from '../content/services.json';
 
 const byCategory = (cat: string) => services.filter(s => s.category === cat).sort((a, b) => a.order - b.order);
 const visitsAndWalks = byCategory('visits-and-walks');
@@ -67,12 +67,7 @@ const additionalServices = byCategory('additional');
       </div>
     </div>
 
-    <PricingNotes notes={[
-      'All prices shown are for single-pet visits.',
-      'Additional charges apply for holidays — please contact us for a quote.',
-      'Multiple pet pricing available upon request.',
-      'Cancellations and refunds can be credited towards future pet sitting services. No cash refunds.',
-    ]} />
+    <PricingNotes notes={pricingNotes} />
   </section>
 
   <CTASection
