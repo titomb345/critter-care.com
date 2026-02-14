@@ -23,6 +23,7 @@ collections:
               - { name: "duration", label: "Duration", widget: "string", required: false, hint: "e.g. 30 min, 1 hr, 7pm - 8am" }
               - { name: "price", label: "Price", widget: "string", hint: "e.g. $30, $45, $20 each way" }
               - { name: "description", label: "Description", widget: "text" }
+              - { name: "category", label: "Category", widget: "select", options: ["visits-and-walks", "outings-and-overnights", "additional"], hint: "Which section this service appears under on the Services page" }
               - { name: "order", label: "Display Order", widget: "number", value_type: "int", min: 1 }
 
   - name: "testimonials"
@@ -40,6 +41,8 @@ collections:
             fields:
               - { name: "name", label: "Reviewer Name", widget: "string" }
               - { name: "quote", label: "Quote", widget: "text" }
+              - { name: "images", label: "Photos", widget: "list", required: false, field: { name: "image", label: "Image", widget: "image" }, hint: "Pet photos for this testimonial" }
+              - { name: "featured", label: "Featured", widget: "boolean", default: false, required: false, hint: "Show in the featured section on the homepage" }
 
   - name: "settings"
     label: "Site Settings"
@@ -92,6 +95,7 @@ collections:
             fields:
               - { name: "name", label: "Pet Name", widget: "string" }
               - { name: "description", label: "Description", widget: "string" }
+              - { name: "photo", label: "Photo", widget: "image", required: false }
 
 
   - name: "documents"
