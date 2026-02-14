@@ -59,6 +59,26 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 85vh;
   object-fit: contain;
   border-radius: 8px;
+  transition: opacity 0.2s ease;
+}
+
+.lightbox-spinner {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-top-color: white;
+  border-radius: 50%;
+  display: none;
+  animation: lightbox-spin 0.7s linear infinite;
+}
+
+.lightbox-spinner.active {
+  display: block;
+}
+
+@keyframes lightbox-spin {
+  to { transform: rotate(360deg); }
 }
 
 .lightbox-close {
@@ -97,6 +117,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .lightbox-nav:hover {
   background: rgba(255,255,255,0.25);
+}
+
+.lightbox-close:focus-visible,
+.lightbox-nav:focus-visible {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: 2px;
 }
 
 .lightbox-prev { left: 1rem; }
@@ -153,6 +179,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .review-modal-close:hover {
   background: rgba(0, 0, 0, 0.05);
+}
+
+.review-modal-close:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 /* Smooth scroll */

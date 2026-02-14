@@ -30,7 +30,7 @@ const hiresImages = images.map(img => {
 ]}>
   {images.length === 1 && (
     <button
-      class="testimonial-img-btn w-full cursor-pointer"
+      class="testimonial-img-btn w-full cursor-pointer focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
       data-images={JSON.stringify(hiresImages)}
       data-index="0"
     >
@@ -51,7 +51,7 @@ const hiresImages = images.map(img => {
     ]}>
       {images.map((img, i) => (
         <button
-          class="testimonial-img-btn cursor-pointer"
+          class="testimonial-img-btn cursor-pointer focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
           data-images={JSON.stringify(hiresImages)}
           data-index={i}
         >
@@ -75,7 +75,7 @@ const hiresImages = images.map(img => {
     </blockquote>
     {isLong && (
       <button
-        class="review-read-more text-primary hover:text-primary-dark font-medium text-sm mb-4 cursor-pointer"
+        class="review-read-more text-primary hover:text-primary-dark font-medium text-sm mb-4 cursor-pointer focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
         type="button"
         data-name={name}
         data-quote={quote}
