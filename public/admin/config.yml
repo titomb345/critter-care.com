@@ -40,11 +40,6 @@ collections:
             fields:
               - { name: "name", label: "Reviewer Name", widget: "string" }
               - { name: "quote", label: "Quote", widget: "text" }
-              - name: "images"
-                label: "Pet Photos"
-                widget: "list"
-                required: false
-                field: { name: "image", label: "Photo", widget: "image", media_folder: "/public/images/testimonials", public_folder: "/images/testimonials" }
 
   - name: "settings"
     label: "Site Settings"
@@ -81,21 +76,6 @@ collections:
               - { name: "muted", label: "Secondary Text", widget: "color", default: "#6B6B6B", hint: "Descriptions, subtitles, placeholder text, and other lower-emphasis content" }
               - { name: "border", label: "Borders", widget: "color", default: "#DDDDD5", hint: "Card outlines, form field borders, divider lines, and the nav bottom border" }
 
-  - name: "gallery"
-    label: "Photo Gallery"
-    description: "Manage photos on the Photo Fun page"
-    files:
-      - name: "gallery"
-        label: "Photos"
-        file: "src/content/gallery.json"
-        format: "json"
-        fields:
-          - name: "photos"
-            label: "Photos"
-            widget: "list"
-            hint: "Upload, reorder, or remove photos. They appear on the Photo Fun page."
-            field: { name: "image", label: "Photo", widget: "image", media_folder: "/public/images/gallery", public_folder: "/images/gallery" }
-
   - name: "about"
     label: "About Page"
     description: "Edit the About Us page content"
@@ -105,7 +85,6 @@ collections:
         file: "src/content/about.json"
         format: "json"
         fields:
-          - { name: "aboutPhoto", label: "Our Story Photo", widget: "image", media_folder: "/public/images", public_folder: "/images", hint: "Photo shown in the 'Our Story' section" }
           - name: "pets"
             label: "Our Furry Family"
             widget: "list"
@@ -113,7 +92,6 @@ collections:
             fields:
               - { name: "name", label: "Pet Name", widget: "string" }
               - { name: "description", label: "Description", widget: "string" }
-              - { name: "photo", label: "Photo", widget: "image", media_folder: "/public/images/pets", public_folder: "/images/pets" }
 
 
   - name: "documents"

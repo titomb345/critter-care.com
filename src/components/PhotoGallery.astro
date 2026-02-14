@@ -1,8 +1,26 @@
 ---
-import gallery from '../content/gallery.json';
+import { Image, getImage } from 'astro:assets';
 import Lightbox from './Lightbox.astro';
 
-const photos = gallery.photos.map(p => p.image);
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/images/gallery/*.jpg',
+  { eager: true }
+);
+
+const photos = Object.entries(imageModules)
+  .sort(([a], [b]) => {
+    const numA = parseInt(a.match(/photo-(\d+)/)?.[1] ?? '0');
+    const numB = parseInt(b.match(/photo-(\d+)/)?.[1] ?? '0');
+    return numA - numB;
+  })
+  .map(([, mod]) => mod.default);
+
+const fullSizeUrls = await Promise.all(
+  photos.map(async (img) => {
+    const full = await getImage({ src: img, format: 'webp' });
+    return full.src;
+  })
+);
 ---
 
 {photos.length > 0 ? (
@@ -11,12 +29,13 @@ const photos = gallery.photos.map(p => p.image);
       <button
         class="gallery-thumb aspect-square overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer border border-border/30 hover:border-primary-light/50 group"
         data-index={i}
-        data-src={photo}
+        data-src={fullSizeUrls[i]}
         data-alt={`Pet ${i + 1}`}
       >
-        <img
+        <Image
           src={photo}
           alt={`Pet ${i + 1}`}
+          width={300}
           class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />
