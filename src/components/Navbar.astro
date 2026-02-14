@@ -1,15 +1,8 @@
 ---
 import NavLink from './NavLink.astro';
+import { navLinks } from '../data/navigation';
 
 const currentPath = Astro.url.pathname;
-
-const navLinks = [
-  { href: '/services', label: 'Services' },
-  { href: '/about', label: 'About Us' },
-  { href: '/hire-us', label: 'Hire Us' },
-  { href: '/testimonials', label: 'Testimonials' },
-  { href: '/gallery', label: 'Photo Fun' },
-];
 ---
 
 <header class="bg-base/95 backdrop-blur-sm sticky top-0 z-50 border-b border-border">
