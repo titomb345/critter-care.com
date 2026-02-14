@@ -7,10 +7,13 @@ import settings from '../content/settings.json';
 interface Props {
   title: string;
   description?: string;
+  noindex?: boolean;
 }
 
-const { title, description = 'Professional pet sitting and boarding services in Lawndale, CA and the South Bay area. Trusted care since 1999.' } = Astro.props;
+const { title, description = 'Professional pet sitting and boarding services in Lawndale, CA and the South Bay area. Trusted care since 1999.', noindex = false } = Astro.props;
 const t = settings.theme;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/images/pets/dogs-in-yard.jpg', Astro.site);
 ---
 
 <!doctype html>
@@ -19,10 +22,20 @@ const t = settings.theme;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonicalURL.href} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Critter Care" />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:image" content={ogImage.href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage.href} />
+    <meta name="geo.region" content="US-CA" />
+    <meta name="geo.placename" content="Lawndale" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -34,6 +47,48 @@ const t = settings.theme;
     <link rel="manifest" href="/site.webmanifest" />
     <title>{title}</title>
     <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "PetCare",
+      "name": "Critter Care",
+      "description": "Professional pet sitting, dog walking, and boarding services in Lawndale, CA and the South Bay area. Trusted care since 1999.",
+      "url": "https://www.critter-care.com",
+      "foundingDate": "1999",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lawndale",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 33.8872,
+          "longitude": -118.3526
+        },
+        "geoRadius": "15mi"
+      },
+      "sameAs": [
+        "https://www.facebook.com/laurieb1"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Pet Care Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Home Visit" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dog Walking" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dog Park Visits" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Overnight Stays" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pet Transportation" } }
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "19"
+      }
+    })} />
     {t && (
       <style set:html={`:root {
         --color-primary: ${t.primary};
@@ -51,8 +106,11 @@ const t = settings.theme;
     )}
   </head>
   <body class="min-h-screen flex flex-col bg-base text-foreground">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[999] focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg">
+      Skip to main content
+    </a>
     <Navbar />
-    <main class="flex-1">
+    <main id="main-content" class="flex-1">
       <slot />
     </main>
     <Footer />
