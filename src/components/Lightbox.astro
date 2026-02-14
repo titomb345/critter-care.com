@@ -73,8 +73,8 @@ const { selector, delegated = false } = Astro.props;
 
     function close() {
       lightbox.classList.remove('active');
-      // Only restore scroll if no other overlay is active behind this one
-      var otherActive = document.querySelector('.review-modal-overlay.active');
+      // Only restore scroll if no other modal overlay is active behind this one
+      var otherActive = document.querySelector('[aria-modal="true"].active');
       if (!otherActive) {
         document.body.style.overflow = '';
       }
