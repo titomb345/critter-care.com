@@ -1,4 +1,6 @@
 ---
+import NavLink from './NavLink.astro';
+
 const currentPath = Astro.url.pathname;
 
 const navLinks = [
@@ -26,17 +28,7 @@ const navLinks = [
       <!-- Desktop Nav -->
       <div class="hidden md:flex items-center gap-1">
         {navLinks.map(link => (
-          <a
-            href={link.href}
-            class:list={[
-              'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
-              currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-                ? 'bg-primary-soft text-primary-dark font-semibold'
-                : 'text-muted hover:text-heading hover:bg-surface-alt/50'
-            ]}
-          >
-            {link.label}
-          </a>
+          <NavLink href={link.href} label={link.label} currentPath={currentPath} />
         ))}
       </div>
 
@@ -60,17 +52,7 @@ const navLinks = [
     <div id="mobile-menu" class="md:hidden hidden pb-4">
       <div class="flex flex-col gap-1">
         {navLinks.map(link => (
-          <a
-            href={link.href}
-            class:list={[
-              'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
-              currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-                ? 'bg-primary-soft text-primary-dark font-semibold'
-                : 'text-muted hover:text-heading hover:bg-surface-alt/50'
-            ]}
-          >
-            {link.label}
-          </a>
+          <NavLink href={link.href} label={link.label} currentPath={currentPath} />
         ))}
       </div>
     </div>
