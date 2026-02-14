@@ -1,14 +1,16 @@
 ---
 interface Props {
   selector: string;
+  delegated?: boolean;
 }
 
-const { selector } = Astro.props;
+const { selector, delegated = false } = Astro.props;
 ---
 
-<div class="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Photo viewer" data-lightbox-for={selector}>
+<div class="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Photo viewer" data-lightbox-for={selector} data-lightbox-delegated={delegated ? 'true' : undefined}>
   <button class="lightbox-close" aria-label="Close">&times;</button>
   <button class="lightbox-nav lightbox-prev" aria-label="Previous photo">&#8249;</button>
+  <div class="lightbox-spinner" aria-hidden="true"></div>
   <img src="" alt="" />
   <button class="lightbox-nav lightbox-next" aria-label="Next photo">&#8250;</button>
 </div>
@@ -16,21 +18,78 @@ const { selector } = Astro.props;
 <script is:inline>
   document.querySelectorAll('[data-lightbox-for]').forEach(lightbox => {
     const selector = lightbox.dataset.lightboxFor;
+    const delegated = lightbox.dataset.lightboxDelegated === 'true';
     const img = lightbox.querySelector('img');
-    const thumbs = document.querySelectorAll(selector);
-    const photos = Array.from(thumbs).map(t => ({ src: t.dataset.src, alt: t.dataset.alt || '' }));
+    const spinner = lightbox.querySelector('.lightbox-spinner');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+    const prevBtn = lightbox.querySelector('.lightbox-prev');
+    const nextBtn = lightbox.querySelector('.lightbox-next');
+    const focusableEls = [closeBtn, prevBtn, nextBtn];
+    let photos = [];
     let current = 0;
+    let triggerElement = null;
 
-    function show() { img.src = photos[current].src; img.alt = photos[current].alt; }
-    function open(i) { current = i; show(); lightbox.classList.add('active'); document.body.style.overflow = 'hidden'; }
-    function close() { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+    // Build photo list from static thumbs (non-delegated mode)
+    if (!delegated) {
+      const thumbs = document.querySelectorAll(selector);
+      photos = Array.from(thumbs).map(t => ({ src: t.dataset.src, alt: t.dataset.alt || '' }));
+      thumbs.forEach(t => t.addEventListener('click', () => open(parseInt(t.dataset.index))));
+    }
+
+    // For delegated mode, listen for clicks on dynamically-inserted elements
+    if (delegated) {
+      document.addEventListener('click', function(e) {
+        var btn = e.target.closest(selector);
+        if (btn) {
+          var images = JSON.parse(btn.dataset.images);
+          var index = parseInt(btn.dataset.index);
+          photos = images.map(function(src) { return { src: src, alt: '' }; });
+          open(index);
+        }
+      });
+    }
+
+    function show() {
+      img.removeAttribute('src');
+      img.style.opacity = '0';
+      spinner.classList.add('active');
+      img.alt = photos[current].alt;
+      img.src = photos[current].src;
+    }
+
+    img.addEventListener('load', () => {
+      spinner.classList.remove('active');
+      img.style.opacity = '1';
+    });
+
+    function open(i) {
+      triggerElement = document.activeElement;
+      current = i;
+      show();
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+
+    function close() {
+      lightbox.classList.remove('active');
+      // Only restore scroll if no other overlay is active behind this one
+      var otherActive = document.querySelector('.review-modal-overlay.active');
+      if (!otherActive) {
+        document.body.style.overflow = '';
+      }
+      if (triggerElement && typeof triggerElement.focus === 'function') {
+        triggerElement.focus();
+      }
+      triggerElement = null;
+    }
+
     function next() { current = (current + 1) % photos.length; show(); }
     function prev() { current = (current - 1 + photos.length) % photos.length; show(); }
 
-    thumbs.forEach(t => t.addEventListener('click', () => open(parseInt(t.dataset.index))));
-    lightbox.querySelector('.lightbox-close').addEventListener('click', close);
-    lightbox.querySelector('.lightbox-prev').addEventListener('click', prev);
-    lightbox.querySelector('.lightbox-next').addEventListener('click', next);
+    closeBtn.addEventListener('click', close);
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
     lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
 
     document.addEventListener('keydown', (e) => {
@@ -38,6 +97,20 @@ const { selector } = Astro.props;
       if (e.key === 'Escape') close();
       if (e.key === 'ArrowRight') next();
       if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'Tab') {
+        const currentIndex = focusableEls.indexOf(document.activeElement);
+        if (e.shiftKey) {
+          e.preventDefault();
+          focusableEls[currentIndex <= 0 ? focusableEls.length - 1 : currentIndex - 1].focus();
+        } else {
+          e.preventDefault();
+          focusableEls[currentIndex >= focusableEls.length - 1 ? 0 : currentIndex + 1].focus();
+        }
+      }
     });
+
+    // Expose open function for external use (e.g., review modal)
+    lightbox._lightboxOpen = open;
+    lightbox._lightboxSetPhotos = function(p) { photos = p.map(function(src) { return { src: src, alt: '' }; }); };
   });
 </script>
