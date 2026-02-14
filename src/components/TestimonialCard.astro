@@ -16,11 +16,13 @@ const excerpt = isLong
 
 // Use hi-res paths if available, otherwise fall back to regular images
 // Hi-res: /images/testimonials/name-1.jpg → /images/testimonials/name-1-hires.jpg
-import fs from 'node:fs';
+const hiresFiles = new Set(
+  Object.keys(import.meta.glob('/public/images/testimonials/*-hires.jpg', { eager: false }))
+    .map(p => p.replace('/public', ''))
+);
 const hiresImages = images.map(img => {
   const hiresPath = img.replace(/\.jpg$/, '-hires.jpg');
-  const fsPath = `public${hiresPath}`;
-  return fs.existsSync(fsPath) ? hiresPath : img;
+  return hiresFiles.has(hiresPath) ? hiresPath : img;
 });
 const imageAlts = images.map((_, i) => images.length === 1 ? `Pet from ${name}` : `Pet ${i + 1} from ${name}`);
 ---
