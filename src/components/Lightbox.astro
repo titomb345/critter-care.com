@@ -38,12 +38,12 @@ const { selector, delegated = false } = Astro.props;
 
     // For delegated mode, listen for clicks on dynamically-inserted elements
     if (delegated) {
-      document.addEventListener('click', function(e) {
-        var btn = e.target.closest(selector);
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest(selector);
         if (btn) {
-          var images = JSON.parse(btn.dataset.images);
-          var index = parseInt(btn.dataset.index);
-          photos = images.map(function(src) { return { src: src, alt: '' }; });
+          const images = JSON.parse(btn.dataset.images);
+          const index = parseInt(btn.dataset.index);
+          photos = images.map((src) => ({ src: src, alt: '' }));
           open(index);
         }
       });
@@ -74,7 +74,7 @@ const { selector, delegated = false } = Astro.props;
     function close() {
       lightbox.classList.remove('active');
       // Only restore scroll if no other modal overlay is active behind this one
-      var otherActive = document.querySelector('[aria-modal="true"].active');
+      const otherActive = document.querySelector('[aria-modal="true"].active');
       if (!otherActive) {
         document.body.style.overflow = '';
       }
@@ -111,6 +111,6 @@ const { selector, delegated = false } = Astro.props;
 
     // Expose open function for external use (e.g., review modal)
     lightbox._lightboxOpen = open;
-    lightbox._lightboxSetPhotos = function(p) { photos = p.map(function(src) { return { src: src, alt: '' }; }); };
+    lightbox._lightboxSetPhotos = (p) => { photos = p.map((src) => ({ src: src, alt: '' })); };
   });
 </script>
