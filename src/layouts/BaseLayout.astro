@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import settings from '../content/settings.json';
 import { testimonials } from '../content/testimonials.json';
+import { services } from '../content/services.json';
 
 interface Props {
   title: string;
@@ -76,13 +77,10 @@ const ogImage = new URL('/images/pets/dogs-in-yard.jpg', Astro.site);
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Pet Care Services",
-        "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Home Visit" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dog Walking" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dog Park Visits" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Overnight Stays" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pet Transportation" } }
-        ]
+        "itemListElement": services.map(s => ({
+          "@type": "Offer",
+          "itemOffered": { "@type": "Service", "name": s.name }
+        }))
       },
       "aggregateRating": {
         "@type": "AggregateRating",
