@@ -1,8 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import Lightbox from '../components/Lightbox.astro';
 import about from '../content/about.json';
+import aboutPhoto from '../assets/images/gallery/photo-41.jpg';
 ---
 
 <BaseLayout title="About Us — Critter Care" description="Learn about Laurie and Critter Care — over 25 years of professional pet sitting in the South Bay area.">
@@ -14,9 +16,10 @@ import about from '../content/about.json';
       <h2 class="font-heading text-2xl sm:text-3xl font-bold text-heading mb-5">Our Story</h2>
       <div class="space-y-5 text-muted leading-relaxed">
         <div class="sm:float-right sm:ml-6 mb-4 sm:mb-2 flex justify-center">
-          <img
-            src={about.aboutPhoto || "/images/gallery/photo-41.jpg"}
+          <Image
+            src={aboutPhoto}
             alt="Laurie with pets — founder of Critter Care"
+            width={224}
             class="w-56 rounded-xl shadow-md border border-border/30 object-cover"
           />
         </div>
