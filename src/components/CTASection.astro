@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonHref?: string;
+  bg?: string;
+}
+
+const { title, description, buttonText, buttonHref = '/hire-us', bg = 'bg-primary-soft' } = Astro.props;
+---
+
+<section class={`${bg} py-20`}>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="font-heading text-2xl sm:text-3xl font-bold text-heading mb-4">{title}</h2>
+    <p class="text-muted mb-6">{description}</p>
+    <a
+      href={buttonHref}
+      class="inline-flex items-center justify-center px-8 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary-dark transition-colors"
+    >
+      {buttonText}
+    </a>
+  </div>
+</section>
