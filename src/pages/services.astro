@@ -6,17 +6,10 @@ import PricingNotes from '../components/PricingNotes.astro';
 import CTASection from '../components/CTASection.astro';
 import { services } from '../content/services.json';
 
-const visitsAndWalks = services.filter(s =>
-  ['Home Visit', 'Dog Walk', 'Dog Walks & Home Visit'].includes(s.name)
-).sort((a, b) => a.order - b.order);
-
-const outingsAndOvernights = services.filter(s =>
-  ['Dog Park Visits', 'Overnight Stays'].includes(s.name)
-).sort((a, b) => a.order - b.order);
-
-const additionalServices = services.filter(s =>
-  ['Transportation Fee'].includes(s.name)
-).sort((a, b) => a.order - b.order);
+const byCategory = (cat: string) => services.filter(s => s.category === cat).sort((a, b) => a.order - b.order);
+const visitsAndWalks = byCategory('visits-and-walks');
+const outingsAndOvernights = byCategory('outings-and-overnights');
+const additionalServices = byCategory('additional');
 ---
 
 <BaseLayout title="Services — Critter Care Pet Sitting & Dog Walking | Lawndale, CA" description="Home visits, dog walking, dog park outings, overnight stays, and pet transportation in Lawndale and the South Bay. Affordable rates starting at $30.">
