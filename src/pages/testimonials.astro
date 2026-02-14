@@ -92,7 +92,11 @@ const rest = testimonials.filter(t => !t.featured);
 
       function closeReview() {
         reviewModal.classList.remove('active');
-        document.body.style.overflow = '';
+        // Only restore scroll if no other overlay (e.g. lightbox) is active on top
+        var otherActive = document.querySelector('.lightbox-overlay.active');
+        if (!otherActive) {
+          document.body.style.overflow = '';
+        }
       }
 
       document.addEventListener('click', function(e) {
