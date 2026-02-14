@@ -22,6 +22,7 @@ const hiresImages = images.map(img => {
   const fsPath = `public${hiresPath}`;
   return fs.existsSync(fsPath) ? hiresPath : img;
 });
+const imageAlts = images.map((_, i) => images.length === 1 ? `Pet from ${name}` : `Pet ${i + 1} from ${name}`);
 ---
 
 <div class:list={[
@@ -32,6 +33,7 @@ const hiresImages = images.map(img => {
     <button
       class="testimonial-img-btn w-full cursor-pointer focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
       data-images={JSON.stringify(hiresImages)}
+      data-alts={JSON.stringify(imageAlts)}
       data-index="0"
     >
       <img
@@ -53,6 +55,7 @@ const hiresImages = images.map(img => {
         <button
           class="testimonial-img-btn cursor-pointer focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
           data-images={JSON.stringify(hiresImages)}
+          data-alts={JSON.stringify(imageAlts)}
           data-index={i}
         >
           <img
@@ -81,6 +84,7 @@ const hiresImages = images.map(img => {
         data-quote={quote}
         data-images={JSON.stringify(images)}
         data-hires-images={JSON.stringify(hiresImages)}
+        data-image-alts={JSON.stringify(imageAlts)}
       >
         Read full review &rarr;
       </button>

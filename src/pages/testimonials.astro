@@ -65,20 +65,22 @@ const rest = testimonials.filter(t => !t.featured);
       var reviewName = document.getElementById('review-modal-name');
       var reviewPhotos = document.getElementById('review-modal-photos');
 
-      function openReview(name, quote, images, hiresImages) {
+      function openReview(name, quote, images, hiresImages, imageAlts) {
         reviewQuote.textContent = quote;
         reviewName.textContent = '\u2014 ' + name;
         reviewPhotos.innerHTML = '';
 
         if (images && images.length > 0) {
+          var alts = imageAlts || images.map(function(_, i) { return 'Pet ' + (i + 1) + ' from ' + name; });
           images.forEach(function(img, i) {
             var btn = document.createElement('button');
             btn.className = 'testimonial-img-btn cursor-pointer rounded-lg overflow-hidden';
             btn.dataset.images = JSON.stringify(hiresImages);
+            btn.dataset.alts = JSON.stringify(alts);
             btn.dataset.index = i;
             var imgEl = document.createElement('img');
             imgEl.src = img;
-            imgEl.alt = 'Pet from ' + name;
+            imgEl.alt = alts[i] || 'Pet from ' + name;
             imgEl.className = 'w-20 h-20 object-cover hover:opacity-80 transition-opacity';
             imgEl.loading = 'lazy';
             btn.appendChild(imgEl);
@@ -104,7 +106,8 @@ const rest = testimonials.filter(t => !t.featured);
         if (btn) {
           var images = JSON.parse(btn.dataset.images || '[]');
           var hiresImages = JSON.parse(btn.dataset.hiresImages || '[]');
-          openReview(btn.dataset.name, btn.dataset.quote, images, hiresImages);
+          var imageAlts = JSON.parse(btn.dataset.imageAlts || '[]');
+          openReview(btn.dataset.name, btn.dataset.quote, images, hiresImages, imageAlts);
         }
       });
 

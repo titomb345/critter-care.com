@@ -42,8 +42,9 @@ const { selector, delegated = false } = Astro.props;
         const btn = e.target.closest(selector);
         if (btn) {
           const images = JSON.parse(btn.dataset.images);
+          const alts = btn.dataset.alts ? JSON.parse(btn.dataset.alts) : [];
           const index = parseInt(btn.dataset.index);
-          photos = images.map((src) => ({ src: src, alt: '' }));
+          photos = images.map((src, i) => ({ src: src, alt: alts[i] || '' }));
           open(index);
         }
       });
@@ -111,6 +112,6 @@ const { selector, delegated = false } = Astro.props;
 
     // Expose open function for external use (e.g., review modal)
     lightbox._lightboxOpen = open;
-    lightbox._lightboxSetPhotos = (p) => { photos = p.map((src) => ({ src: src, alt: '' })); };
+    lightbox._lightboxSetPhotos = (p, a) => { photos = p.map((src, i) => ({ src: src, alt: a && a[i] || '' })); };
   });
 </script>
