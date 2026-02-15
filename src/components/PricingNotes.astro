@@ -1,0 +1,20 @@
+---
+interface Props {
+  notes: string[];
+  title?: string;
+}
+
+const { notes, title = 'Good to Know' } = Astro.props;
+---
+
+<div class="bg-surface rounded-2xl p-8 sm:p-10">
+  <h3 class="font-heading text-lg font-bold text-heading mb-3">{title}</h3>
+  <ul class="space-y-2 text-sm text-muted">
+    {notes.map(note => (
+      <li class="flex items-start gap-2">
+        <span class="text-primary mt-0.5">&#9679;</span>
+        <span>{note}</span>
+      </li>
+    ))}
+  </ul>
+</div>

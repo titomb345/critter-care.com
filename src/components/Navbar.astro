@@ -1,13 +1,9 @@
 ---
-const currentPath = Astro.url.pathname;
+import NavLink from './NavLink.astro';
+import PawPrint from './PawPrint.astro';
+import { navLinks } from '../data/navigation';
 
-const navLinks = [
-  { href: '/services', label: 'Services' },
-  { href: '/about', label: 'About Us' },
-  { href: '/hire-us', label: 'Hire Us' },
-  { href: '/testimonials', label: 'Testimonials' },
-  { href: '/gallery', label: 'Photo Fun' },
-];
+const currentPath = Astro.url.pathname;
 ---
 
 <header class="bg-base/95 backdrop-blur-sm sticky top-0 z-50 border-b border-border">
@@ -15,9 +11,7 @@ const navLinks = [
     <div class="flex items-center justify-between h-16 sm:h-20">
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2 group">
-        <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true">
-          <ellipse cx="32" cy="42" rx="14" ry="12" fill="#333" /><ellipse cx="15" cy="22" rx="7" ry="9" fill="#333" transform="rotate(-10 15 22)" /><ellipse cx="49" cy="22" rx="7" ry="9" fill="#333" transform="rotate(10 49 22)" /><ellipse cx="25" cy="10" rx="6" ry="8" fill="#333" transform="rotate(-5 25 10)" /><ellipse cx="39" cy="10" rx="6" ry="8" fill="#333" transform="rotate(5 39 10)" />
-        </svg>
+        <PawPrint class="w-8 h-8" />
         <span class="font-heading text-xl sm:text-2xl font-bold text-heading">
           Critter Care
         </span>
@@ -26,17 +20,7 @@ const navLinks = [
       <!-- Desktop Nav -->
       <div class="hidden md:flex items-center gap-1">
         {navLinks.map(link => (
-          <a
-            href={link.href}
-            class:list={[
-              'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
-              currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-                ? 'bg-primary-soft text-primary-dark font-semibold'
-                : 'text-muted hover:text-heading hover:bg-surface-alt/50'
-            ]}
-          >
-            {link.label}
-          </a>
+          <NavLink href={link.href} label={link.label} currentPath={currentPath} />
         ))}
       </div>
 
@@ -60,17 +44,7 @@ const navLinks = [
     <div id="mobile-menu" class="md:hidden hidden pb-4">
       <div class="flex flex-col gap-1">
         {navLinks.map(link => (
-          <a
-            href={link.href}
-            class:list={[
-              'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
-              currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-                ? 'bg-primary-soft text-primary-dark font-semibold'
-                : 'text-muted hover:text-heading hover:bg-surface-alt/50'
-            ]}
-          >
-            {link.label}
-          </a>
+          <NavLink href={link.href} label={link.label} currentPath={currentPath} />
         ))}
       </div>
     </div>

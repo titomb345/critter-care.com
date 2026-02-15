@@ -16,12 +16,15 @@ const excerpt = isLong
 
 // Use hi-res paths if available, otherwise fall back to regular images
 // Hi-res: /images/testimonials/name-1.jpg → /images/testimonials/name-1-hires.jpg
-import fs from 'node:fs';
+const hiresFiles = new Set(
+  Object.keys(import.meta.glob('/public/images/testimonials/*-hires.jpg', { eager: false }))
+    .map(p => p.replace('/public', ''))
+);
 const hiresImages = images.map(img => {
   const hiresPath = img.replace(/\.jpg$/, '-hires.jpg');
-  const fsPath = `public${hiresPath}`;
-  return fs.existsSync(fsPath) ? hiresPath : img;
+  return hiresFiles.has(hiresPath) ? hiresPath : img;
 });
+const imageAlts = images.map((_, i) => images.length === 1 ? `Pet from ${name}` : `Pet ${i + 1} from ${name}`);
 ---
 
 <div class:list={[
@@ -30,8 +33,9 @@ const hiresImages = images.map(img => {
 ]}>
   {images.length === 1 && (
     <button
-      class="testimonial-img-btn w-full cursor-pointer"
+      class="testimonial-img-btn w-full cursor-pointer focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
       data-images={JSON.stringify(hiresImages)}
+      data-alts={JSON.stringify(imageAlts)}
       data-index="0"
     >
       <img
@@ -51,8 +55,9 @@ const hiresImages = images.map(img => {
     ]}>
       {images.map((img, i) => (
         <button
-          class="testimonial-img-btn cursor-pointer"
+          class="testimonial-img-btn cursor-pointer focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
           data-images={JSON.stringify(hiresImages)}
+          data-alts={JSON.stringify(imageAlts)}
           data-index={i}
         >
           <img
@@ -75,12 +80,13 @@ const hiresImages = images.map(img => {
     </blockquote>
     {isLong && (
       <button
-        class="review-read-more text-primary hover:text-primary-dark font-medium text-sm mb-4 cursor-pointer"
+        class="review-read-more text-primary hover:text-primary-dark font-medium text-sm mb-4 cursor-pointer focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
         type="button"
         data-name={name}
         data-quote={quote}
         data-images={JSON.stringify(images)}
         data-hires-images={JSON.stringify(hiresImages)}
+        data-image-alts={JSON.stringify(imageAlts)}
       >
         Read full review &rarr;
       </button>

@@ -3,7 +3,8 @@
     {
     "name": "Bill Bergquist",
     "quote": "I am very protective of my German Shepherd, Pico, and always worry when I trust her to someone else. But with Laurie, I know Pico is getting the attention and love she deserves. I'd trust her with my dog's life, and I'll gladly continue using Critter Care knowing Pico is in safe hands.",
-    "images": ["/images/testimonials/bill-bergquist-1.jpg", "/images/testimonials/bill-bergquist-2.jpg"]
+    "images": ["/images/testimonials/bill-bergquist-1.jpg", "/images/testimonials/bill-bergquist-2.jpg"],
+    "featured": true
   },
   {
     "name": "Andrea & Richard Berger",
@@ -18,7 +19,8 @@
   {
     "name": "Bridget Kugel",
     "quote": "Laurie is an awesome caregiver for my dogs. She is warm and caring, professional and responsible. I have never worried a minute while they were in her care.",
-    "images": ["/images/testimonials/bridget-kugel-1.jpg", "/images/testimonials/bridget-kugel-2.jpg"]
+    "images": ["/images/testimonials/bridget-kugel-1.jpg", "/images/testimonials/bridget-kugel-2.jpg"],
+    "featured": true
   },
   {
     "name": "Nikki Rice",
@@ -43,7 +45,8 @@
   {
     "name": "Carlene P.",
     "quote": "Laurie was so great! Easy to communicate with and sent me lots of photos of my little fur baby while I was away! I would definitely recommend her!",
-    "images": ["/images/testimonials/carlene-p-1.jpg", "/images/testimonials/carlene-p-2.jpg", "/images/testimonials/carlene-p-3.jpg"]
+    "images": ["/images/testimonials/carlene-p-1.jpg", "/images/testimonials/carlene-p-2.jpg", "/images/testimonials/carlene-p-3.jpg"],
+    "featured": true
   },
   {
     "name": "Lisa Sweet",
@@ -63,7 +66,8 @@
   {
     "name": "Svetlana P.",
     "quote": "She is the best. I never have to worry about my cutie pie. I would recommend her to anyone. It's so hard to find a trustworthy pet sitter but I can trust her.",
-    "images": ["/images/testimonials/svetlana-p-1.jpg", "/images/testimonials/svetlana-p-2.jpg"]
+    "images": ["/images/testimonials/svetlana-p-1.jpg", "/images/testimonials/svetlana-p-2.jpg"],
+    "featured": true
   },
   {
     "name": "Mihiri Weerasinghe",
@@ -83,7 +87,8 @@
   {
     "name": "Kevin McCabe",
     "quote": "Our puppies are normally nervous around strangers, but not with Laurie. She took the time to get to know them, she is energetic and we know she really cares for animals. Laurie has also been very accommodating with her schedule. We appreciate all she does for us and our furry kids.",
-    "images": ["/images/testimonials/kevin-mccabe-1.jpg", "/images/testimonials/kevin-mccabe-2.jpg"]
+    "images": ["/images/testimonials/kevin-mccabe-1.jpg", "/images/testimonials/kevin-mccabe-2.jpg"],
+    "featured": true
   },
   {
     "name": "Tanya Wong",
