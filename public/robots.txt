@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.critter-care.com/sitemap-index.xml
+Sitemap: https://critter-care.com/sitemap-index.xml

@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.critter-care.com',
+  site: 'https://critter-care.com',
   integrations: [sitemap({
     filter: (page) => !page.includes('/thank-you') && !page.includes('/404'),
   })],
