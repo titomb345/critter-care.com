@@ -59,8 +59,16 @@ import caricature from '../images/laurie-caricature.jpg';
       </div>
     </div>
 
-    <div class="border-t border-surface/10 mt-8 pt-6 text-center text-xs text-surface/40">
+    <div class="border-t border-surface/10 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-3 text-xs text-surface/40">
       <p>&copy; {new Date().getFullYear()} {settings.copyright}. All rights reserved.</p>
+      <p>
+        Website by <a
+          href="https://billbergquist.dev"
+          class="text-primary-light/70 hover:text-primary-light transition-colors"
+          target="_blank"
+          rel="noopener noreferrer nofollow">BillBergquist.dev</a
+        >
+      </p>
     </div>
   </div>
 </footer>
