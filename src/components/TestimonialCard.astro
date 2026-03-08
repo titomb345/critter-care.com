@@ -41,6 +41,8 @@ const imageAlts = images.map((_, i) => images.length === 1 ? `Pet from ${name}` 
       <img
         src={images[0]}
         alt={`Pet from ${name}`}
+        width="400"
+        height="208"
         class="w-full h-52 object-cover hover:opacity-90 transition-opacity"
         loading="lazy"
       />
@@ -63,6 +65,8 @@ const imageAlts = images.map((_, i) => images.length === 1 ? `Pet from ${name}` 
           <img
             src={img}
             alt={`Pet ${i + 1} from ${name}`}
+            width="200"
+            height="128"
             class="w-full h-32 object-cover hover:opacity-90 transition-opacity"
             loading="lazy"
           />

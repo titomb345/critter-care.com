@@ -20,6 +20,11 @@ const { title, subtitle, showImage = false } = Astro.props;
         alt="Happy pets at Critter Care"
         class="w-full h-full object-cover opacity-20"
         loading="eager"
+        fetchpriority="high"
+        format="avif"
+        quality={40}
+        widths={[640, 1024, 1920]}
+        sizes="100vw"
       />
       <div class="absolute inset-0 bg-gradient-to-b from-foreground/30 to-transparent"></div>
     </div>

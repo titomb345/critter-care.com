@@ -87,7 +87,7 @@ import aboutPhoto from '../assets/images/gallery/photo-41.jpg';
         {about.pets.map((pet, i) => (
           <div class="bg-white rounded-2xl shadow-sm border border-border/50 text-center overflow-hidden">
             <button class="pet-thumb w-full cursor-pointer" data-index={i} data-src={pet.photo} data-alt={pet.name}>
-              <img src={pet.photo} alt={pet.name} class="w-full h-40 object-cover hover:scale-105 transition-transform duration-300" />
+              <img src={pet.photo} alt={pet.name} width="400" height="160" class="w-full h-40 object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
             </button>
             <div class="p-5">
               <h3 class="font-heading font-bold text-heading mb-1">{pet.name}</h3>
