@@ -10,9 +10,9 @@
   "phone": "",
   "copyright": "Critter Care",
   "theme": {
-    "primary": "#1ea7a7",
-    "primaryLight": "#7dd4d4",
-    "primaryDark": "#158585",
+    "primary": "#137a7a",
+    "primaryLight": "#1ea7a7",
+    "primaryDark": "#0f6666",
     "primarySoft": "#e6f7f7",
     "base": "#FAFAF8",
     "surface": "#F5F5F0",

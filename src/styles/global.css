@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "@fontsource-variable/nunito";
+@import "@fontsource-variable/inter";
 
 @theme {
   /* Accent */
@@ -21,8 +23,8 @@
   --color-border: #DDDDD5;
 
   /* Fonts */
-  --font-heading: 'Nunito', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Nunito Variable', sans-serif;
+  --font-body: 'Inter Variable', sans-serif;
 }
 
 body {
